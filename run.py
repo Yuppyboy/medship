@@ -148,8 +148,10 @@ from io import BytesIO
 from flask import send_file, after_this_request, jsonify
 from botocore.config import Config
 import imageio
+import tempfile
 import time
 import datetime
+
 
 s3 = boto3.client(
     "s3",
@@ -193,7 +195,9 @@ def create_video():
             return response
 
         emotion_percents = get_dominant_emotion(frame_data)
+
         print(emotion_percents)
+
 
         # Return the filename and modified frame_data in the response
         return (
